@@ -1,0 +1,3 @@
+[submodule "examples/Arduino.mk"]
+	path = examples/Arduino.mk
+	url = git@github.com:rngtng/Arduino.mk.git

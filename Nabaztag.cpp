@@ -20,7 +20,6 @@
 #include <Nabaztag.h>
 #include <Wire.h>
 #include <twi.h>
-#include <log.h>
 
 void receiveCallback(int length)
 {
@@ -105,7 +104,6 @@ void NabaztagInjector::processReceive(int length) {
   if( cmd == CMD_CLOSE ) inited = false;
 
   if( inited ) {
-    lputs(cmd);
     if( cmd == CMD_READ ) sendEnabled = true; //aparently a send is always expected after a read
     if( cmd == CMD_INITATE || cmd == CMD_SELECT ) { //not sure for CMD_SELECT, but code shows that it need response
       byte outNew[] = { 1, 1 };
@@ -129,8 +127,6 @@ void NabaztagInjector::processReceive(int length) {
 void NabaztagInjector::processRequest() {
   if( sendEnabled && outSize > 0 ) {
     Wire.send(out, outSize);
-
-    lputs(LOG_OUT);
 
     if( sendBuffer.getSize() < 1 ) { //all data is send
       inited = false;
@@ -183,8 +179,6 @@ void NabaztagInjector::prepareOutBuffer() {
     else {
       out[i+1] = 0x00; //fill up with zeros
     }
-
-    lprint(out[i+1]);
   }
 }
 // Preinstantiate Objects //////////////////////////////////////////////////////

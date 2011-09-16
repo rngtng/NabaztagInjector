@@ -20,10 +20,10 @@ But a closer look on the RFID reader show, that the chip is connected via I2C bu
 the very same bus is also available on the Arduino.
 
 The RFID reader works in a way that on demand from the processor, is checks if any RFID tags are around, and if so,
-it send their ID back to the processor. This ID can be any 8 Byte long data.
+it send their ID back to the processor, whereas the ID can be any 8 Byte long data.
 
-And that's what **NabaztagInjector** makes use of. It pushes the Arduino to pretend it is the RFID chip and on request
-it sends 8 Byte back.
+And that's what **NabaztagInjector** makes use of. It pushes the Arduino to pretend it is the RFID chip and sends on request
+8 Byte back.
 
 //TODO
 For not using the actually RFID read feature,
@@ -48,14 +48,17 @@ For real-live usecases, check out the examples folder.
 Put the library into your Arduino libraries folder, and do same with [ByteBuffer](http://siggiorn.com/wp-content/uploads/libraries/ArduinoByteBuffer.zip).
 
 
+## Setup
+
+
 ## Compiling
 **NabaztagInjector** compiles with the latest Arduino IDE, as well as with the [Arduino.mk Makefile](http://mjo.tc/atelier/2009/02/arduino-cli.html). See examples folder.
 
 
 ## Dependencies
 
-For I2C communication, **NabaztagInjector** depends on the Arduino core library _Wire_. The circular send buffer, depends on the [_ByteBuffer_ library by Siggi](http://siggiorn.com/?p=460),
-and included within the code.
+For I2C communication, **NabaztagInjector** depends on the Arduino core library _Wire_. The circular send buffer depends on the [_ByteBuffer_ library](http://siggiorn.com/?p=460) by Siggi,
+and is included within the example code.
 
 
 ## Todo
@@ -68,8 +71,8 @@ and drops the packages. Some delays would may help here.
 
 ## Contributors
 
-Big thanks to **ccb23** for helping me to reverse engineer the IC2 communication and reading & understanding the original [Nabaztag sources]() and
-the [CRX14 specs]().
+Big thanks to **ccb23** for helping me to reverse engineer the IC2 communication and reading & understanding the original [Nabaztag sources](http://code.google.com/p/nabaztag-source-code/) and
+the [RFID reader CRX14 specs](http://www.datasheetcatalog.org/datasheet/stmicroelectronics/8880.pdf).
 
 
 ## Contributing
