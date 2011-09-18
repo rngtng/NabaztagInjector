@@ -177,7 +177,7 @@ void NabaztagInjector::prepareOutBuffer() {
       out[i+1] = sendBuffer.get();
     }
     else {
-      out[i+1] = 0x00; //fill up with zeros
+      out[i+1] = 0xFF; //fill up with bits
     }
   }
 }
