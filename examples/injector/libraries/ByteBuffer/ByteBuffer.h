@@ -7,7 +7,7 @@
 #ifndef ByteBuffer_h
 #define ByteBuffer_h
 
-#include "WProgram.h"
+#include "Arduino.h"
 
 class ByteBuffer
 {

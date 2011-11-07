@@ -19,7 +19,7 @@
 
 #include <Nabaztag.h>
 #include <Wire.h>
-#include <twi.h>
+#include <utility/twi.h>
 
 void receiveCallback(int length)
 {
@@ -37,7 +37,7 @@ int NabaztagInjector::rfidPort = 0;
 
 byte NabaztagInjector::in[16];
 uint8_t NabaztagInjector::out[32];
-int NabaztagInjector::outSize = 0;
+size_t NabaztagInjector::outSize = 0;
 
 ByteBuffer NabaztagInjector::sendBuffer;
 
@@ -94,7 +94,7 @@ void NabaztagInjector::processReceive(int length) {
   noInterrupts();
 
   for(int i = 0; i < length; i++) {
-    byte data = Wire.receive();
+    byte data = Wire.read();
     in[i] = data;
   }
 
@@ -126,7 +126,7 @@ void NabaztagInjector::processReceive(int length) {
 
 void NabaztagInjector::processRequest() {
   if( sendEnabled && outSize > 0 ) {
-    Wire.send(out, outSize);
+    Wire.write(out, outSize);
 
     if( sendBuffer.getSize() < 1 ) { //all data is send
       inited = false;

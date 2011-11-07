@@ -20,7 +20,7 @@
 #ifndef Nabaztag_h
 #define Nabaztag_h
 
-#include "WProgram.h"
+#include "Arduino.h"
 #include <ByteBuffer.h>
 
 #define SEND_BUFFER_SIZE 128
@@ -47,7 +47,7 @@ class NabaztagInjector
 
     static byte in[];                     // in buffer for reading
     static uint8_t out[];                 // out buffer for sending
-    static int outSize;                   // size of Buffer to send
+    static size_t outSize;                // size of Buffer to send
 
     static ByteBuffer sendBuffer;         // actual data to send
 

@@ -5,7 +5,7 @@
  */
  
 #include <util/atomic.h>
-#include "WProgram.h"
+//#include "Arduino.h"
 #include "ByteBuffer.h"
 
 
