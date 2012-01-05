@@ -3,9 +3,8 @@
   Created by Sigurdur Orn, July 19, 2010.
   siggi@mit.edu
  */
- 
+
 #include <util/atomic.h>
-//#include "Arduino.h"
 #include "ByteBuffer.h"
 
 
@@ -100,14 +99,14 @@ byte ByteBuffer::getFromBack(){
 
 int ByteBuffer::putIntInFront(int in){
     byte *pointer = (byte *)&in;
-	putInFront(pointer[0]);	
-	putInFront(pointer[1]);	
+	putInFront(pointer[0]);
+	putInFront(pointer[1]);
 }
 
 int ByteBuffer::putInt(int in){
     byte *pointer = (byte *)&in;
-	put(pointer[1]);	
-	put(pointer[0]);	
+	put(pointer[1]);
+	put(pointer[0]);
 }
 
 
@@ -133,18 +132,18 @@ int ByteBuffer::getIntFromBack(){
 
 int ByteBuffer::putLongInFront(long in){
     byte *pointer = (byte *)&in;
-	putInFront(pointer[0]);	
-	putInFront(pointer[1]);	
-	putInFront(pointer[2]);	
-	putInFront(pointer[3]);	
+	putInFront(pointer[0]);
+	putInFront(pointer[1]);
+	putInFront(pointer[2]);
+	putInFront(pointer[3]);
 }
 
 int ByteBuffer::putLong(long in){
     byte *pointer = (byte *)&in;
-	put(pointer[3]);	
-	put(pointer[2]);	
-	put(pointer[1]);	
-	put(pointer[0]);	
+	put(pointer[3]);
+	put(pointer[2]);
+	put(pointer[1]);
+	put(pointer[0]);
 }
 
 
@@ -168,25 +167,24 @@ long ByteBuffer::getLongFromBack(){
 	return ret;
 }
 
-
 //
 // Floats
 //
 
 int ByteBuffer::putFloatInFront(float in){
     byte *pointer = (byte *)&in;
-	putInFront(pointer[0]);	
-	putInFront(pointer[1]);	
-	putInFront(pointer[2]);	
-	putInFront(pointer[3]);	
+	putInFront(pointer[0]);
+	putInFront(pointer[1]);
+	putInFront(pointer[2]);
+	putInFront(pointer[3]);
 }
 
 int ByteBuffer::putFloat(float in){
     byte *pointer = (byte *)&in;
-	put(pointer[3]);	
-	put(pointer[2]);	
-	put(pointer[1]);	
-	put(pointer[0]);	
+	put(pointer[3]);
+	put(pointer[2]);
+	put(pointer[1]);
+	put(pointer[0]);
 }
 
 float ByteBuffer::getFloat(){

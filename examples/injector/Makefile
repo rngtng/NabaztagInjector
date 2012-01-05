@@ -15,7 +15,7 @@ F_CPU                  = 16000000
 
 # That'S for Mac OS X
 ARDUINO_PORT           = /dev/tty.usb*
-AVRDUDE_ARD_PROGRAMMER = stk500v1
+AVRDUDE_ARD_PROGRAMMER = arduino
 AVRDUDE_ARD_BAUDRATE   = 57600
 
 include ../Arduino.mk/Arduino.mk
