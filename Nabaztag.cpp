@@ -52,8 +52,10 @@ NabaztagInjector::NabaztagInjector()
 void NabaztagInjector::init(int _rfidPort)
 {
   rfidPort = _rfidPort;
-  pinMode(rfidPort, OUTPUT);
-  digitalWrite(rfidPort, LOW);
+  if(rfidPort > 0) {
+    pinMode(rfidPort, OUTPUT);
+    digitalWrite(rfidPort, LOW);
+  }
 
   sendBuffer.init(SEND_BUFFER_SIZE);
 
@@ -106,14 +108,20 @@ void NabaztagInjector::processReceive(int length) {
 
   if( inited ) {
     if( cmd == CMD_READ ) sendEnabled = true; //aparently a send is always expected after a read
-    if( cmd == CMD_INITATE || cmd == CMD_SELECT ) { //not sure for CMD_SELECT, but code shows that it need response
-      byte outNew[] = { 1, 1 };
+    if( cmd == CMD_INITATE ) { //not sure for CMD_SELECT, but code shows that it need response
+      byte s = ( sendBuffer.getSize() > 0 ) ? 1 : 0;
+      byte outNew[] = { s, 1 };
       outSize = 2;
       memcpy(out, outNew, outSize);
     }
     if( cmd == CMD_SLOT ) {
       byte outNew[] = { 18,  0x01, 0x00,   0x0F, 0, 0, 0, 0, 0, 0, 0,   0, 0, 0, 0, 0, 0, 0, 0 }; //length, BitMask, TagID
       outSize = 19;
+      memcpy(out, outNew, outSize);
+    }
+    if( cmd == CMD_SELECT ) { //not sure for CMD_SELECT, but code shows that it need response
+      byte outNew[] = { 1, 1 };
+      outSize = 2;
       memcpy(out, outNew, outSize);
     }
     if( cmd == CMD_GET_UID ) {
@@ -141,13 +149,17 @@ void NabaztagInjector::processRequest() {
 // Private //////////////////////////////////////////////////////
 
 void NabaztagInjector::enableRFID() {
-  twi_setAddress(DUMMY_ADR);
-  digitalWrite(rfidPort, HIGH);
+  if(rfidPort > 0) {
+    twi_setAddress(DUMMY_ADR);
+    digitalWrite(rfidPort, HIGH);
+  }
 }
 
 void NabaztagInjector::disableRFID() {
-  twi_setAddress(CRX14_ADR);
-  digitalWrite(rfidPort, LOW);
+  if(rfidPort > 0) {
+    twi_setAddress(CRX14_ADR);
+    digitalWrite(rfidPort, LOW);
+  }
 }
 
 byte NabaztagInjector::getCommand(int length) {
