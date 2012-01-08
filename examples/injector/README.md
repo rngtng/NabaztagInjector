@@ -2,7 +2,10 @@
 
 Example Injector
 
+Read data from Serial port and 'inject' via RFID into Nabaztag rabbit.
+
 ## Compilation
+
 There are to ways to compile this example:
 
 ### Arduino IDE

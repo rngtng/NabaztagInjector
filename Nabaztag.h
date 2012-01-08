@@ -57,7 +57,7 @@ class NabaztagInjector
     void prepareOutBuffer();              // move from to sendBuffer int out buffer
   public:
     NabaztagInjector();
-    void init(int);                       // pin number where RFID chip is connected
+    void begin(int);                       // pin number where RFID chip is connected
     void inject(uint8_t);
     void inject(uint8_t*, uint8_t);
     void inject(int);

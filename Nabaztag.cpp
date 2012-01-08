@@ -49,7 +49,7 @@ NabaztagInjector::NabaztagInjector()
 
 // Public //////////////////////////////////////////////////////
 
-void NabaztagInjector::init(int _rfidPort)
+void NabaztagInjector::begin(int _rfidPort)
 {
   rfidPort = _rfidPort;
   if(rfidPort > 0) {
@@ -186,12 +186,14 @@ byte NabaztagInjector::getCommand(int length) {
 
 void NabaztagInjector::prepareOutBuffer() {
   out[0] = 0x00; //Dummy first Byte
+
+  //it's "Little Endian" vs. "Big Endian" so cwe have to reverse data input
   for( int i = 8; i > 0; i-- ) {
     if( sendBuffer.getSize() > 0 ) {
       out[i] = sendBuffer.get();
     }
     else {
-      out[i] = 0xFF; //fill up with bits
+      out[i] = 0xFF; //fill up with bits -> see README.md
     }
   }
 }

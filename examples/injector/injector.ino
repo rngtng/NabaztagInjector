@@ -1,6 +1,6 @@
 /*
    injector.pde - Example usage of NabaztagInjector Arduino Library
-   Copyright (c) 2011 Tobias Bielohlawek.  All right reserved.
+   Copyright (c) 2012 Tobias Bielohlawek.  All right reserved.
 */
 
 // uncomment when using Arduino IDE
@@ -9,17 +9,19 @@
 
 #include <Nabaztag.h>
 
-int cnt = 0;
-
 void setup() {
-  Nabaztag.init(26); // Analog Port 03
+  Serial.begin(9600);
+  Nabaztag.begin(9); // User 0 for standalone
 }
 
-/* inject every 4 second the current counter value to Nabaztag */
-
 void loop() {
-  delay(10000);
 
-  Nabaztag.inject(cnt);
-  cnt++;
+  while(Serial.available() > 0) {
+    //read the incoming byte ...
+    byte data = Serial.read();
+
+    //... and inject to the rabbit
+    Nabaztag.inject(data);
+  }
+
 }
