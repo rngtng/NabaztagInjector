@@ -53,10 +53,11 @@ void NabaztagInjector::init(int _rfidPort)
 {
   rfidPort = _rfidPort;
   pinMode(rfidPort, OUTPUT);
+  digitalWrite(rfidPort, LOW);
 
   sendBuffer.init(SEND_BUFFER_SIZE);
 
-  Wire.begin(DUMMY_ADR);
+  Wire.begin(CRX14_ADR);
   Wire.onReceive(receiveCallback);
   Wire.onRequest(requestCallback);
 
@@ -132,6 +133,7 @@ void NabaztagInjector::processRequest() {
       inited = false;
       enableRFID();
     }
+    outSize = 0;
     sendEnabled = false;
   }
 }
@@ -172,12 +174,12 @@ byte NabaztagInjector::getCommand(int length) {
 
 void NabaztagInjector::prepareOutBuffer() {
   out[0] = 0x00; //Dummy first Byte
-  for( int i = 0; i < 8; i++ ) {
+  for( int i = 8; i > 0; i-- ) {
     if( sendBuffer.getSize() > 0 ) {
-      out[i+1] = sendBuffer.get();
+      out[i] = sendBuffer.get();
     }
     else {
-      out[i+1] = 0xFF; //fill up with bits
+      out[i] = 0xFF; //fill up with bits
     }
   }
 }
