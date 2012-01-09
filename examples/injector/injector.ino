@@ -11,7 +11,7 @@
 
 void setup() {
   Serial.begin(9600);
-  Nabaztag.begin(9); // User 0 for standalone
+  Nabaztag.begin(9); // RFID Reader connected atPIN 9, leave empty for standalone
 }
 
 void loop() {
