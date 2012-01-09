@@ -53,7 +53,7 @@ See the picture:
 
 <img src="http://www.rngtng.com/files/2012/01/nabaztag-arduino-rfid-hack.jpg" width="500">
 
-Starting from the Nabaztag mainboard: the RFID reader connector is on top left (Q2). From top to bottom the pins are: _VCC (Q2)_, _GND (Blue)_, _SDA (Red)_, _SCL (Green)_. Connect _SCL_ to Arduino _Analog Pin 5_, _SDA_ to _Analog Pin 4_, _GND_ to _GND_. _VCC_ can be left blank if Arduino has its own power supply, otherwise connect to Arduino power input. Connected RFID readers _VCC_ to the pin given in `Nabaztag.begin(<pin number>)`. Go to examples folder, compile and upload sketch.
+Starting from the Nabaztag mainboard: the RFID reader connector is on top left (Q2). From top to bottom the pins are: _VCC (Q2)_, _GND (Blue)_, _SDA (Red)_, _SCL (Green)_. Connect _SCL_ to Arduino _Analog Pin 5_, _SDA_ to _Analog Pin 4_, _GND_ to _GND_. _VCC_ can be left blank if Arduino has its own power supply, otherwise connect to Arduino power input. Connect RFID reader _VCC_ to the pin given in `Nabaztag.begin(<pin number>)`. Go to examples folder, compile and upload sketch.
 
 That's it! Happy injecting!
 
@@ -74,10 +74,10 @@ The RFID chip and the Nabaztag firmware support up 16 devices UIDs per request. 
 The rabbit request rfid about every 750-1000ms. The 128 byte Buffer helps here to process high frequent data peaks, but obviously constant high frequent data will result in data loss.
 
 ### Data
-The default bootcode take only IDS as valid when upper 3 Bytes are larger than zero, fill up empty data with `0xFF` is used as workaround here.
+The default bootcode takes IDs only as valid when upper 3 Bytes are larger than zero. Filling up 'empty' data with `0xFF` is used as workaround here.
 
 ### Power
-I couldn't manage to power Arduino + RFID solely by the rabbit. Arduino in standalone mode worked fine though!  Maybe simple amplifier circuit would help?
+I couldn't manage to power Arduino + RFID solely by the rabbit. Arduino in standalone mode worked fine though! Maybe simple amplifier circuit would help?
 
 ### Nabaztag version
 I used a Nabaztag V2. Not sure if this works with V1 or [Karotz](http://www.karotz.com/home) as well.
@@ -86,11 +86,11 @@ I used a Nabaztag V2. Not sure if this works with V1 or [Karotz](http://www.karo
 Yes, it's possible to write your own custom bootcode which allows to get rid of most of the constraints. Pls check my blogpost on that.
 
 ### Supported OS
-Software developed on Mac OS X. In theory is should compile on Linux & Win smoothly. Please confirm.
+Software developed on Mac OS X Lion, Arduino 1.0. In theory is should compile on Linux & Win smoothly too. Please confirm.
 
 ### RFID Connector
-Tests showed that there was actually no need to turn off the RFID reader chip while Arduino was sending. It
-was fully working by connecting just both _VCC_. Actually it felt even more stable.
+Tests showed that there was no need to turn off the RFID reader chip while Arduino was sending. It
+was fully working by connecting RFIDs _GND_ and _VCC_ to Arudino pins. Actually it felt even more stable.
 
 
 ## Contributors
