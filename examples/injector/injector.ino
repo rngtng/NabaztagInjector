@@ -10,7 +10,7 @@
 #include <Nabaztag.h>
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   Nabaztag.begin(9); // RFID Reader connected atPIN 9, leave empty for standalone
 }
 
